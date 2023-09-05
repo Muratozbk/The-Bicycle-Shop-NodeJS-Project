@@ -12,7 +12,15 @@ const server = http.createServer(async (req, res) => {
     const id = myUrl.searchParams.get('id')
 
     if (pathname === '/') {
-        const html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        let html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
+
+        let allTheBicycles = '';
+        for (let index = 0; index < 6; index++) {
+            allTheBicycles += AllMainBicycles;
+        }
+        html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
+
         res.writeHead(200, { 'Content-Type': 'text/html' })
         res.end(html);
 
