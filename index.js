@@ -16,7 +16,7 @@ const server = http.createServer(async (req, res) => {
         const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
 
         let allTheBicycles = '';
-        for (let index = 0; index < 6; index++) {
+        for (let index = 0; index < bicycles.length; index++) {
             allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index]);
         }
         html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
